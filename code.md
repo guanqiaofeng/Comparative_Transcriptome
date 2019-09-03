@@ -1,4 +1,4 @@
-# fastq-mcf (Version 1.05): raw fastq screening
+## fastq-mcf (Version 1.05): raw fastq screening
 ```
 $ fastq-mcf -t 0.01 -q 15 -l 60 adapters.fa "RAW_INPUT_R1.fq" "RAW_INPUT_R2.fq" -o "OUTPUT_R1.trimmed.fq" -o "OUTPUT_R2.trimmed.fq" 2>INPUT_trim.log &
   # -t N     % occurance threshold before adapter clipping
@@ -6,7 +6,7 @@ $ fastq-mcf -t 0.01 -q 15 -l 60 adapters.fa "RAW_INPUT_R1.fq" "RAW_INPUT_R2.fq" 
   # -l N     Minimum remaining sequence length
 ```
 
-# GSNAP (Version 2016-08-16): Mapping to reference genome
+## GSNAP (Version 2016-08-16): Mapping to reference genome
 ```
 #<1. Generate genome map>#
 $ gmap_build -k 13 -D . -d /PATH_TO_GENOME/SPECIES.gmap /PATH_TO_GENOME/SPECIES.fa
@@ -43,3 +43,23 @@ $ gsnap -D . -d SPECIES.gmap --nthreads=5 -k 13 -B 5 -m 0.05 -n 5 -Q -N 1 -s SPE
   # PATH/R2: the other pair-end reads
   ```
   
+## cufflinks (Version 2.2.1): Transcript assembly and differential expression analysis
+```
+#<1.cufflinks: generate assembly from each sample>#
+$ cufflinks -g /PATH_TO_GENOME/SPECIES_exons.gff3 -b /PATH_TO_GENOME/SPECIES.fa -u -p 4 -F 0.08 -I 13000 --min-intron-length 10 -N /PATH_TO_BAM/BAM
+  # -g: genome guided assembly
+  # -b: provide genome fasta file to correct bias in transcript abundance estimates
+  # -u: multi read correction
+  # -F: min-isoform fraction, 0.08 or 8% of the most abundant isoform (the major isoform) of the gene.
+  # -I: max-intron-length 13000 (13000 for P. balsamifera; 17000 for S. viminalis; 10000 for A. officinalis)
+  # --min-intron-length: minimum intron length 10
+  # -N: upper quartile normalization, this can improve robustness of differential expression calls for less abundant genes and transcripts
+
+#<2.cuffmerge: merge assemblies into a single reference>#
+$ cuffmerge -g /PATH_TO_GENOME/SPECIES_exons.gff3 -s /PATH_TO_GENOME/SPECIES.fa -p 5 --keep-tmp gtf.list
+  # -g: genome guided 
+  # -s: provide genome fasta file
+  # -p: use 5 threads to run
+  # --keep-tmp: Keep all intermediate files during merge
+
+#<3.screening transcripts>#
