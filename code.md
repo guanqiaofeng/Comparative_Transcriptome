@@ -63,3 +63,12 @@ $ cuffmerge -g /PATH_TO_GENOME/SPECIES_exons.gff3 -s /PATH_TO_GENOME/SPECIES.fa 
   # --keep-tmp: Keep all intermediate files during merge
 
 #<3.screening transcripts>#
+
+
+#<4.differential expression>#
+$ cuffdiff -b /PATH_TO_GENOME/SPECIES.fa -p 4 -L TREATMENT1,TREATMENT2 /PATH_TO_SCREENED_GTF/SCREENED.gtf /PATH_TO_BAM/TREATMENT1_REP1.bam,/PATH_TO_BAM/TREATMENT1_REP2.bam,/PATH_TO_BAM/TREATMENT1_REP3.bam,/PATH_TO_BAM/TREATMENT1_REP4.bam,/PATH_TO_BAM/TREATMENT1_REP5.bam /PATH_TO_BAM/TREATMENT2_REP1.bam,/PATH_TO_BAM/TREATMENT2_REP2.bam,/PATH_TO_BAM/TREATMENT2_REP3.bam,/PATH_TO_BAM/TREATMENT2_REP4.bam,/PATH_TO_BAM/TREATMENT2_REP5.bam 2>log.txt &
+  # -b: genome fasta file
+  # -p: use 4 threads to run
+  # -L: comma-separated list of condition labels
+ ``` 
+ 
