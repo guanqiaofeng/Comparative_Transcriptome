@@ -1,5 +1,16 @@
 #!/usr/bin/perl
 
+# Input file format "gene_ann_dir.txt"
+# -	Potri.001G000200
+# +	Potri.001G000300
+# -	Potri.001G000400
+# -	Potri.001G000500
+# +	Potri.001G000600
+# -	Potri.001G000700
+# -	Potri.001G000800
+# -	Potri.001G000900
+# +	Potri.001G001000
+
 %hash = ();
 
 open FH, "<gene_ann_dir.txt";
