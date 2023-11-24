@@ -8,9 +8,15 @@ Pipeline used in "Feng G, Sanderson, BJ, Keefover-Ring K, Liu J, Ma T, Yin T, Sm
 This pipeline apply the standard cufflinks pipleline for transcriptomics study of three species: populus, willow and asparagus. It identifys sex-biased genes by comparing RNA profiles of male and female flowers. 
 
 Steps: 
+
 --> pre-data processing (fastqc)
+
 --> sequence mapping (GSNAP)
+
 --> assembly generation (cufflinks)
+
 --> assembly merging --reference generation (cuffmerge)
+
 --> reference cleanning (in house perl scripts)
+
 --> differential expression calling (cuffdiff)
