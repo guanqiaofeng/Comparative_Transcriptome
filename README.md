@@ -9,7 +9,7 @@ This pipeline applies the standard cufflinks pipleline for transcriptomics study
 
 Steps: 
 
---> pre-data processing (fastqc)
+--> pre-data processing (fastq-mcf)
 
 --> sequence mapping (GSNAP)
 
